@@ -19,7 +19,7 @@ public class AllAcronmy {
 	public AllAcronmy(){
 		
 	}
-	public AllAcronmy(ArrayList<String> wordList, ArrayList<Integer> fixed, TrieTree source, int categ){
+	public AllAcronmy(ArrayList<String> wordList, ArrayList<Integer> fixed, TrieTree source, int categ,double tfidf){
 		setFixed(fixed);
 		setCateg(categ);
 		setTrieTree(source);
@@ -33,7 +33,7 @@ public class AllAcronmy {
 		for(int length = len-3; length < len+3; length++){
 			getSubsequence("", str, length, 0);
 		}
-		rank();
+		rank(tfidf);
 		/*
 		//test
 		Iterator<String> iter = acronmyList.iterator();
@@ -54,7 +54,7 @@ public class AllAcronmy {
 			getSubsequence(word, charList.substring(1), length, which+1);
 		}
 	}
-	public void rank(){
+	public void rank(double sourceTFIDF){
 		DBLinker db = new DBLinker();
 		Connection conn = db.getConnect();
 		
@@ -71,7 +71,8 @@ public class AllAcronmy {
 				rs = db.search(conn, sql);
 				if(rs.next())
 					tfidf *= Double.valueOf(rs.getString(1));
-				rankedList.add(new Words(word, tfidf));
+				//这里找的是相对大小
+				rankedList.add(new Words(word, Math.abs(sourceTFIDF-tfidf)));
 			}
 			conn.close();
 		} catch (SQLException e) {

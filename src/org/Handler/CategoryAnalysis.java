@@ -11,6 +11,8 @@ import com.mysql.jdbc.Connection;
 
 public class CategoryAnalysis {
 	final int MAXCATEG = 29;//一共是20个类别
+	double tfidf = 0;
+	int n = 0; //单词数
 	public CategoryAnalysis(){
 		
 	}
@@ -19,7 +21,7 @@ public class CategoryAnalysis {
 		Connection conn = (Connection)db.getConnect();
 		int category = 0;
 		int tf_idf = 0;
-		
+		n = input.size();
 		double[] tfidf = new double[MAXCATEG];
 		//每个单词对于每一个分类的tfidf加起来。所以外层循环应该是每一个分类。
 		for(int i = 1; i <= MAXCATEG; i++){
@@ -32,9 +34,9 @@ public class CategoryAnalysis {
 		//选择tfidf值最大的类别并输出
 		category = chooseTheMax(tfidf);
 		for(int i = 0; i < MAXCATEG; i++){
-			System.out.println(tfidf[i]);
+			System.out.println(i+":"+tfidf[i]);
 		}
-		System.out.println("分类号：" + category);
+		System.out.println("分类号：" + category+"\n非停止词数："+input.size());
 		return category;
 	}
 	private double getTF(DBLinker db, Connection conn, String word, int categ){
@@ -73,15 +75,18 @@ public class CategoryAnalysis {
 		return idf;
 	}
 	private int chooseTheMax(double[] tfidf){
-		double max = tfidf[0];
+		this.tfidf = tfidf[0];
 		int categ = 0;
 		for(int i = 0; i < tfidf.length; i++){
-			if(max < tfidf[i]){
-				max = tfidf[i];
+			if(this.tfidf < tfidf[i]){
+				this.tfidf = tfidf[i];
 				categ = i;
 			}
 		}
+		this.tfidf = this.tfidf/n;
 		return categ+1;
 	}
-	
+	public double getTFIDF(){
+		return tfidf;
+	}
 }

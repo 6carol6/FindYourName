@@ -28,7 +28,7 @@ public class SourceCollector {
 		String[] messwords = new String[MAXN];
 		inputString = inputString.trim();
 		messwords = inputString.split(" ");
-		fixed.add(Integer.valueOf(0));
+		//fixed.add(Integer.valueOf(0));
 		for(int i = 0; i < messwords.length; i++){
 			input.add(messwords[i]);
 			//fixed.add(fixed.get(i)+Integer.valueOf(messwords[i].length()));
@@ -53,7 +53,9 @@ public class SourceCollector {
 				if(!rs.next()){//如果停止词表里没有这个词
 					noStop.add(input.get(i));
 					noStopLocate.add(Integer.valueOf(i));
-					if(f_location != 0)
+					if(fixed.isEmpty())
+						fixed.add(Integer.valueOf(f_location));
+					else if(Math.random() < 0.8)
 						fixed.add(Integer.valueOf(f_location));
 				}
 				f_location += input.get(i).length();

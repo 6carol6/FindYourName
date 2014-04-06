@@ -45,6 +45,7 @@ function getMessage()
 			String categUclassify = category.getCategUclassify();*/
 			//用tf-idf的方法要构建树
 			int categ = category.getCategory(sourceCollector.getNoStop());
+			double tfidf = category.getTFIDF();
 			TrieTreeCreator ttc = new TrieTreeCreator(categ);
 			TrieTree tree = ttc.getTree();
 			
@@ -65,7 +66,7 @@ function getMessage()
 				}
 				out.print("<br />");
 				//用tf-idf方法要在树上找词
-				AllAcronmy acr = new AllAcronmy(str, sourceCollector.getFixed(), tree, categ);
+				AllAcronmy acr = new AllAcronmy(str, sourceCollector.getFixed(), tree, categ, tfidf);
 				
 				//AllAcronmy acr = new AllAcronmy(str, sourceCollector.getFixed(), categUclassify);
 				

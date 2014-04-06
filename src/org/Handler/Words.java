@@ -32,7 +32,7 @@ public class Words implements Comparable{
 		// TODO Auto-generated method stub
 		double tfidf1 = this.getTFIDF();
 		double tfidf2 = ((Words) compareWord).getTFIDF();
-		if(tfidf1 < tfidf2) return 1;
+		if(tfidf1 > tfidf2) return 1;
 		else if(tfidf1 == tfidf2) return 0;
 		else return -1;
 	}
