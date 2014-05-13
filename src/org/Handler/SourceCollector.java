@@ -53,9 +53,9 @@ public class SourceCollector {
 				if(!rs.next()){//如果停止词表里没有这个词
 					noStop.add(input.get(i));
 					noStopLocate.add(Integer.valueOf(i));
-					if(fixed.isEmpty())
-						fixed.add(Integer.valueOf(f_location));
-					else if(Math.random() < 0.8)
+					//if(fixed.isEmpty())
+						//fixed.add(Integer.valueOf(f_location));
+					//if(Math.random() < 0.8)
 						fixed.add(Integer.valueOf(f_location));
 				}
 				f_location += input.get(i).length();

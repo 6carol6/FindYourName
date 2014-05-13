@@ -3,7 +3,7 @@ package org.Handler;
 import java.io.Serializable;
 import java.util.Comparator;
 
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Comparison;
+//import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Comparison;
 
 /**
  * 这是一个用于储存单词及其TF-IDF的类

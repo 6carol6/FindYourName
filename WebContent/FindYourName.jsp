@@ -49,7 +49,6 @@ function getMessage()
 			TrieTreeCreator ttc = new TrieTreeCreator(categ);
 			TrieTree tree = ttc.getTree();
 			
-			
 			ChangeWord change = new ChangeWord(sourceCollector.getNoStop());
 			//array保存各种替换后的词组（第0个是原词组）
 			ArrayList<ArrayList<String>> array = change.getChange();

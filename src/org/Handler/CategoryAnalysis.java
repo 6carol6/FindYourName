@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import com.mysql.jdbc.Connection;
 
 public class CategoryAnalysis {
-	final int MAXCATEG = 29;//一共是20个类别
+	final int MAXCATEG = 181;//一共是20个类别+12
 	double tfidf = 0;
 	int n = 0; //单词数
 	public CategoryAnalysis(){

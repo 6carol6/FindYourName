@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import edu.mit.jwi.Dictionary;
 import edu.mit.jwi.IDictionary;
 import edu.mit.jwi.item.IIndexWord;
+import edu.mit.jwi.item.ISenseKey;
 import edu.mit.jwi.item.ISynset;
 import edu.mit.jwi.item.IWord;
 import edu.mit.jwi.item.IWordID;
@@ -48,9 +49,39 @@ public class WordnetAccess {
 			e.printStackTrace();
 		}
 		return synonyms;
-	}/*
+	}
+	public boolean isWord(String str){
+		try{
+			dict.open();
+			IIndexWord idxWordN = dict.getIndexWord(str, POS.NOUN);
+			if(idxWordN != null){
+				dict.close();
+				return true;
+			}
+		} catch (IOException e){
+			e.printStackTrace();
+		}
+		dict.close();
+		return false;
+	}
+	public boolean isNeg(String word){
+		try{
+			dict.open();
+			IIndexWord idxWordN = dict.getIndexWord(word, POS.ADJECTIVE);
+			if(idxWordN != null){
+				IWord wd = dict.getWord((ISenseKey) idxWordN.getID());
+				//wd.
+				//»¹Ä¾ÓÐÐ´Íê¡£¡£¡£¡£
+			}
+		} catch (IOException e){
+			e.printStackTrace();
+		}
+		dict.close();
+		return false;
+	}
+	/*
 	public static void main(String[] args){
 		WordnetAccess access = new WordnetAccess();
-		ArrayList<String> temp = access.getSynonyms("learning");
+		if(access.isWord("happy")) System.out.println("yes");
 	}*/
 }
